@@ -1,50 +1,41 @@
 from random import shuffle
+from collections import namedtuple
 
 
-class Deck:
-    """
-Class representing the deck
-    """
+class BJ:
+    # Making the deck deck
     def __init__(self):
-        """
-Initialize the deck and shuffle it.
-        """
-        suits = ['spade', 'club', 'diamond', 'heart']
+        # Initialize the deck and shuffle it.
+        suits = ['Spade', 'Club', 'Diamond', 'Heart']
         values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
         self.deck = []
-        for i in suits:
-            for j in values:
-                self.deck.append((i, j))
+        for suit in suits:
+            for value in values:
+                self.deck.append((suit, value))
         shuffle(self.deck)
 
     def draw(self):
-        """
-Draw one card from the deck and return the drawn card.
-        """
+        # Draw a card
         return self.deck.pop(0)
 
 
 class Person:
-    """
-Class representing the player
-    """
+
     def __init__(self):
-        """
-Initialize your hand.
-        """
+        
+        # initialize the hand
         self.hands = []
         self.point = 0
 
     def add(self, card):
-        """
-Add a card to your hand.
-        """
+
+        # Add a card to your hand.
         self.hands.append(card)
 
     def point_sum(self):
-        """
-Find the total score of playing cards.
-        """
+
+        # Find the total score of playing cards.
+
         self.point = 0
         for i in self.hands:
             if i[1] in ['J', 'Q', 'K']:
@@ -58,12 +49,10 @@ Find the total score of playing cards.
 
 
 def run():
-    """
-Main processing
-    """
+
     print('Welcome to Blackjack!')
 
-    d = Deck()
+    d = BJ()
     p = Person()
     c = Person()
 
@@ -120,16 +109,22 @@ Main processing
                 return
         else:
             break
-
+    
     if player_point == cpu_point:
         print("It's a draw.")
-        return
     elif player_point > cpu_point:
         print('You win!')
-        return
     elif player_point < cpu_point:
         print('You lose.')
-        return
+
+    while True:
+        choice = input("Do you wish to play again? Y/N/Q:" )
+        if choice.lower() == 'Y' or choice.lower() == 'Yes':
+            break
+        elif choice.lower() == 'Q' or choice.lower() == 'Quit':
+            exit()
+        else:
+            print("Invalid Response")
 
 
 def drawing(class1, class2, name):
